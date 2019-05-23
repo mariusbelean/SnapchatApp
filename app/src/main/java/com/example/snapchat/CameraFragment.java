@@ -48,6 +48,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback {
         }
 
         Button mLogout = view.findViewById(R.id.logout);
+        Button mFindUsers = view.findViewById(R.id.findUsers);
         Button mCapture = view.findViewById(R.id.capture);
 
         mCapture.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +61,12 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback {
             @Override
             public void onClick(View v) {
                 LogOut();
+            }
+        });
+        mLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FindUsers();
             }
         });
 
@@ -75,6 +82,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback {
 
         return view;
     }
+
 
     private void captureImage() {
         camera.takePicture(null, null, jpegCallBack);
@@ -142,6 +150,13 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback {
             }
         }
     }
+
+    private void FindUsers() {
+        Intent intent = new Intent(getContext(), FindUsersActivity.class);
+        startActivity(intent);
+        return;
+    }
+
     private void LogOut() {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getContext(), SplashScreenActivity.class);
